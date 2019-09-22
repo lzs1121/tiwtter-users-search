@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input
+        type="text"
+        id="search"
+        value=""
+        placeholder="search term"
+    />
+    <button id="getTweets">Search Tweets</button>
+    <script>
+        const search = document.getElementById('search');
+        const getTweets = document.getElementById('getTweets');
+        getTweets.addEventListener('click', getAllTweets);
+
+        function getAllTweets(){
+            const url = '/users/' + search.value;
+            fetch(url).then(function(response){
+                return response.json()
+            }).then(function(data){
+                outputTweets(data)
+            }).catch(function(error){
+                console.log(JSON.stringify(error));
+            })
+        }
+
+        function outputTweets(data){
+            // output.innerHTML = '';
+            // data.forEach(function(item, i){
+            //     console.log('items', item);
+            //     let hyper = `
+            //         <a href="http://twitter.com/i/web/status/${item.id_str}" target="_blank">
+            //             ${item.text}
+            //         </a>
+            //     `;
+            //     // let li = document.createElement('li');
+            //     // let span = document.createElement('span');                
+            //     // span.innerHTML = `${hyper} <small>${item.user.name}</small>`;
+            //     // li.appendChild(span);
+            //     output.appendChild(hyper);
+            // });
+            console.log('data', data);
+        }
+    </script>
+</body>
+</html>
